@@ -10,6 +10,7 @@ public class playerScore : MonoBehaviour
     public Text scoreText;
     public static int score;
     public static string playerName;
+    user user = new user();
     private System.Random random= new System.Random();
     public InputField nameText;
     
@@ -22,14 +23,12 @@ public class playerScore : MonoBehaviour
     public void OnSumit()
     {
         playerName = nameText.text;
-        dataBase();
+        PostToDataBase();
     }
-    private void dataBase()
+    private void PostToDataBase()
     {
         user user = new user();
-        RestClient.Put("https://usuarios-ff410.firebaseio.com/", user);
-        
-
+        RestClient.Put("https://usuarios-ff410.firebaseio.com/" + playerName + ".json", user);
     }
 
     // Update is called once per frame
